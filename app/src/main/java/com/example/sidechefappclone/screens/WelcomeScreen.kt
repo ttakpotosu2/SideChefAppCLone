@@ -39,9 +39,7 @@ fun WelcomeScreen(
         OnBoardingPage.Third,
         OnBoardingPage.Forth
     )
-
     val pagerState = rememberPagerState()
-
 }
 
 @Composable
