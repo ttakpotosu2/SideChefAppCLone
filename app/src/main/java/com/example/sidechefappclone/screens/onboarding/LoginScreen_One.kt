@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,13 +16,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,28 +27,32 @@ import com.example.sidechefappclone.R
 @Composable
 fun LoginScreen_One() {
     Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter,
     ) {
         Image(
             painter = painterResource(id = R.drawable.background_four),
             contentDescription = "",
             contentScale = ContentScale.Crop
         )
-        Column{
+        Column(
+            horizontalAlignment = Alignment.End,
+            modifier = Modifier.padding(16.dp)
+        ){
             Box(
-
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(width = 80.dp, height = 30.dp)
+                    .size(width = 60.dp, height = 30.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .alpha(.3f)
+                    .alpha(.4f)
                     .background(Color.Black)
-                    .clickable { }
+                    .clickable { },
             ) {
                 Text(
                     "Skip".uppercase(),
                     style = TextStyle(
-                        fontSize = 16.sp,
+                        fontSize = 18.sp,
                         textAlign = TextAlign.Center,
                         color = Color.White,
                     )
@@ -143,16 +142,16 @@ fun LoginScreen_One() {
                         modifier = Modifier.clickable { /*TODO*/  }
                     )
                 }
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     "By using SideChef you agree to our Privacy Policy and\n Terms of Use",
                     style = TextStyle(
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         color = Color.White,
                         textAlign = TextAlign.Center
                     )
                 )
             }
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
