@@ -40,10 +40,26 @@ fun WelcomeScreen(
         OnBoardingPage.Forth
     )
     val pagerState = rememberPagerState()
+
+    HorizontalPager(
+        count = pages.size,
+        state = pagerState,
+
+        ) { index ->
+
+        val page = pages[index]
+
+        PagerScreen(
+            onBoardingPage = page,
+            pagerState = pagerState)
+    }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun PagerScreen(onBoardingPage: OnBoardingPage) {
+fun PagerScreen(onBoardingPage: OnBoardingPage,
+pagerState: PagerState
+) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -90,7 +106,7 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
                     )
                 )
             }
-            ButtonsRow()
+            ButtonsRow(pagerState = pagerState)
         }
     }
 }
@@ -98,10 +114,8 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ButtonsRow(
-
+    pagerState: PagerState
 ) {
-    val pagerState = rememberPagerState()
-
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -115,7 +129,6 @@ fun ButtonsRow(
                 textDecoration = TextDecoration.Underline
             )
         )
-        //add pager dots
         HorizontalPagerIndicator(
             modifier = Modifier
                 .align(Alignment.CenterVertically),
@@ -167,34 +180,42 @@ fun FinishButton(
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 @Preview(showBackground = true)
 fun FirstOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.First)
+        PagerScreen(onBoardingPage = OnBoardingPage.First,
+            pagerState = rememberPagerState())
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 @Preview(showBackground = true)
 fun SecondOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.Second)
+        PagerScreen(onBoardingPage = OnBoardingPage.Second,
+            pagerState = rememberPagerState())
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 @Preview(showBackground = true)
 fun ThirdOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.Third)
+        PagerScreen(onBoardingPage = OnBoardingPage.Third,
+        pagerState = rememberPagerState())
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 @Preview(showBackground = true)
 fun ForthOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.Forth)
+        PagerScreen(onBoardingPage = OnBoardingPage.Forth,
+            pagerState = rememberPagerState())
     }
 }

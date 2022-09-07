@@ -72,7 +72,7 @@ fun LoginScreen_One() {
                     text = "Cook with Confidence",
                     style = TextStyle(
                         color = Color.White,
-                        fontSize = 36.sp,
+                        fontSize = 34.sp,
                     )
                 )
                 Row(
