@@ -44,9 +44,7 @@ fun WelcomeScreen(
     HorizontalPager(
         count = pages.size,
         state = pagerState,
-
         ) { index ->
-
         val page = pages[index]
 
         PagerScreen(

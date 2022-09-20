@@ -42,9 +42,13 @@ fun SideChefAppCLoneTheme(
     }
 
     val systemUiController = rememberSystemUiController()
-
+    val useDarkIcons = !isSystemInDarkTheme()
     SideEffect {
-        systemUiController.setStatusBarColor(color = Color.Transparent)
+        systemUiController.setStatusBarColor(color = Color.Black)
+        systemUiController.setSystemBarsColor(
+            color = Color.White,
+            darkIcons = useDarkIcons
+        )
     }
 
     MaterialTheme(

@@ -3,7 +3,6 @@ package com.example.sidechefappclone.screens.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.sidechefappclone.util.BottomButtons
 
 @Composable
 fun LoginScreen_Two() {
@@ -71,7 +71,9 @@ fun LoginScreen_Two() {
 
         LabelledCheckBox()
         Spacer(modifier = Modifier.height(16.dp))
-        BottomButtons(buttonText = "Next")
+        BottomButtons(buttonText = "Next", onClick = {
+            /*TODO*/
+        })
     }
 }
 
@@ -96,6 +98,8 @@ fun LoginTextField(
         label = { Text(label)},
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent,
+            focusedIndicatorColor = Color.Black,
+            cursorColor = Color.Black,
             unfocusedLabelColor = Color.Black,
             focusedLabelColor = Color.Black
         ),
@@ -124,23 +128,3 @@ fun LabelledCheckBox() {
     }
 }
 
-@Composable
-fun BottomButtons(
-    buttonText : String
-) {
-    Button(
-        onClick = {},
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.Black,
-            contentColor = Color.White
-        ),
-        shape = RoundedCornerShape(30.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp)
-    ) {
-        Text(
-            text = buttonText.uppercase()
-        )
-    }
-}
