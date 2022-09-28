@@ -9,10 +9,10 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/side_chef_logo"
-        android:label="@string/app_name"
+        android:label="Side Chef App Clone"
         android:roundIcon="@drawable/side_chef_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SplashScreen"
+        android:theme="@style/Theme.SideChefAppCLone"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"

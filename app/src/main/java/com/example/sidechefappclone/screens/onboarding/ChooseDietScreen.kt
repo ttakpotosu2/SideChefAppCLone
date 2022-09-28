@@ -1,13 +1,16 @@
 package com.example.sidechefappclone.screens.onboarding
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -123,6 +126,7 @@ fun ChooseDietScreen(
 @Preview(
     showBackground = true
 )
+
 @Composable
 fun ChooseDietScreenPreview() {
     ChooseDietScreen()
@@ -202,3 +206,5 @@ fun DietScreenProgressBar() {
         )
     }
 }
+
+

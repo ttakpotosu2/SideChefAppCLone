@@ -74,14 +74,5 @@ fun CustomBottomNavigationItem(item:Screen, isSelected:Boolean, onClick:()->Unit
 @Composable
 fun Prev1() {
     CustomBottomNavigation(currentScreenId = Screen.ForYou.id){
-
-    }
-}
-
-@Preview
-@Composable
-fun Prev2() {
-    CustomBottomNavigationItem(item = Screen.ForYou, isSelected = true) {
-
     }
 }

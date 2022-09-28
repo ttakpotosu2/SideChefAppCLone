@@ -12,17 +12,9 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnrememberedMutableState")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        // set FLAG_LAYOUT_NO_LIMITS
-//        // app content will extend to system bars
-//        // it should be before setContent block
-//        window.setFlags(
-//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-//        )
-
         setContent {
             SideChefAppCLoneTheme {
+
                 WelcomeScreen(navController = rememberNavController())
             }
         }
