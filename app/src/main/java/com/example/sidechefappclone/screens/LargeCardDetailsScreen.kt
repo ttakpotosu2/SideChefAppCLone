@@ -1,5 +1,6 @@
 package com.example.sidechefappclone.screens
 
+
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -199,8 +200,7 @@ fun LargeCardDetails() {
                 .offset(y = (-75).dp)
                 .clip(RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp))
                 .background(Color.White),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            //verticalArrangement = Arrangement.spacedBy(6.dp)
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -609,4 +609,3 @@ fun CommentsList(commentsData: CommentsData) {
         }
     }
 }
-

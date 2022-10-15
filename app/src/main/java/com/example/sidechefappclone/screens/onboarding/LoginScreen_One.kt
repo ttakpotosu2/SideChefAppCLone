@@ -156,8 +156,8 @@ fun LoginScreen_One() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun LoginScreen_OnePreview() {
+fun Prev1() {
     LoginScreen_One()
 }

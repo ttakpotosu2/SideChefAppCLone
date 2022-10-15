@@ -58,12 +58,7 @@ fun ChooseDietScreen(
                 fontWeight = FontWeight.Light
             )
         )
-//        LazyVerticalGrid(
-//            cells = GridCells.Fixed(2)){
-//            items(chooseDietCards){ item ->
-//                DietsCards(image = item.image, dietType = item.dietType)
-//            }
-//        }
+
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
             horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -133,7 +128,7 @@ fun ChooseDietScreenPreview() {
 }
 
 //@OptIn(ExperimentalFoundationApi::class)
-//@Composable
+//@Composab le
 //fun AllergiesTags(
 //  //  chips: List<String>
 //) {
