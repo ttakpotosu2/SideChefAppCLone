@@ -1,6 +1,7 @@
 package com.example.sidechefappclone.screens
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -36,6 +37,7 @@ import com.example.sidechefappclone.util.BottomButtons
 import com.example.sidechefappclone.util.IngredientsList
 import com.example.sidechefappclone.util.NutritionSection
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LargeCardDetailsScreen() {
     Scaffold(
@@ -163,7 +165,9 @@ fun BottomNavigation() {
 }
 
 @Composable
-fun LargeCardDetails() {
+fun LargeCardDetails(
+ //   paddingValues: PaddingValues
+) {
     val ingredientsListRepository = IngredientsListRepository()
     val getIngredientsListData = ingredientsListRepository.getIngredientsListData()
 
@@ -171,6 +175,7 @@ fun LargeCardDetails() {
         modifier = Modifier
             .background(Color.White)
             .verticalScroll(rememberScrollState(0))
+         //   .padding(paddingValues)
     ) {
         Box(
             modifier = Modifier
@@ -303,7 +308,6 @@ fun LargeCardDetails() {
                     )
                 )
             }
-
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -340,9 +344,7 @@ fun LargeCardDetails() {
             NutritionSection()
         }
         DirectionsSection()
-
         ProfileSection()
-
         CommentsSection()
     }
 }
@@ -564,6 +566,7 @@ fun CommentsSection() {
         for (comments in getCommentsData){
             CommentsList(commentsData = comments)
         }
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }
 

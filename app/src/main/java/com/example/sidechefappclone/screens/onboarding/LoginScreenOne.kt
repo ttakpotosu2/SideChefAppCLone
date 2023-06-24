@@ -22,10 +22,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.sidechefappclone.R
+import com.example.sidechefappclone.navigation.Navigation
 
 @Composable
-fun LoginScreen_One() {
+fun LoginScreenOne(
+    navController: NavHostController
+) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -115,14 +119,13 @@ fun LoginScreen_One() {
                         backgroundColor = Color.White,
                         contentColor = Color.Black
                     ),
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(Navigation.LoginScreenTwo.route) },
                     modifier = Modifier
                         .clip(RoundedCornerShape(40.dp))
                         .fillMaxWidth()
                         .height(40.dp)
                 ){
                     Icons.Filled.Email
-
                     Text("Signup with email".uppercase())
                 }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -154,10 +157,4 @@ fun LoginScreen_One() {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun Prev1() {
-    LoginScreen_One()
 }

@@ -11,23 +11,23 @@ sealed class OnBoardingPage (
     val description: String? = null,
     ){
     object First : OnBoardingPage(
-        backgroundImage = R.drawable.background_one,
+        backgroundImage = R.drawable.image_1,
         logoImage = R.drawable.side_chef_logo_text,
         title = "Shop Ingredients\n For Any Recipe"
     )
     object Second : OnBoardingPage(
-        backgroundImage = R.drawable.background_two,
+        backgroundImage = R.drawable.image_2,
         title = "Personalized Recipe Discovery",
         description = "Tell us your food preferences and we will only serve you delicious recipe " +
                 "ideas"
     )
     object Third : OnBoardingPage(
-        backgroundImage = R.drawable.background_two,
+        backgroundImage = R.drawable.image_3,
         title = "Never Forget an Ingredient",
         description = "Build your weekly grocery list and stay organized while you sleep."
     )
     object Forth : OnBoardingPage(
-        backgroundImage = R.drawable.background_three,
+        backgroundImage = R.drawable.image_4,
         title = "Your Favorite Recipes at Your Finger Tips",
         description = "Save time on planning by always having your favorite recipes within reach"
     )

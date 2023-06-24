@@ -41,9 +41,13 @@ fun CustomBottomNavigation(
 }
 
 @Composable
-fun CustomBottomNavigationItem(item:Screen, isSelected:Boolean, onClick:()->Unit) {
-    val background=if (isSelected) Black else Color.Transparent
-    val contentColor=if (isSelected) White else Black
+fun CustomBottomNavigationItem(
+    item: Screen,
+    isSelected: Boolean,
+    onClick:() -> Unit
+) {
+    val background = if (isSelected) Black else Color.Transparent
+    val contentColor = if (isSelected) White else Black
 
     Box(modifier = Modifier
         .clip(CircleShape)

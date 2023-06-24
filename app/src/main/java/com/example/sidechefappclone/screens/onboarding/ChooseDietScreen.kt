@@ -1,16 +1,22 @@
 package com.example.sidechefappclone.screens.onboarding
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,21 +24,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.sidechefappclone.R
+import com.example.sidechefappclone.data.AllergiesRepo
 import com.example.sidechefappclone.util.BottomButtons
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontVariation.width
+import com.example.sidechefappclone.navigation.Navigation
 
+@ExperimentalLayoutApi
 @ExperimentalFoundationApi
 @Composable
 fun ChooseDietScreen(
+    navController: NavHostController,
 
-) {
+    ) {
+    val allergiesRepo = AllergiesRepo()
+
     Column(
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -40,14 +54,14 @@ fun ChooseDietScreen(
             .fillMaxSize()
             .background(Color.White)
             .padding(16.dp)
-    ){
-        DietScreenProgressBar()
+    ) {
+        DietScreenProgressBar(navController)
 
         Text(
             "Do you follow any of the\nfollowing diets?",
             style = TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Medium,
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
         )
@@ -60,7 +74,7 @@ fun ChooseDietScreen(
         )
 
         LazyVerticalGrid(
-            cells = GridCells.Fixed(4),
+            columns = GridCells.Fixed(4),
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
             content = {
@@ -108,47 +122,26 @@ fun ChooseDietScreen(
                 }
             }
         )
-        Text(
-            "Any ingredient allergies or intolerances?",
-        )
-//        AllergiesTags()
-
-        BottomButtons(buttonText = "Continue", onClick = {  })
+        Text("Any ingredient allergies or intolerances?", style = TextStyle(fontSize = 20.sp))
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            allergiesRepo.getAllergies().forEach {
+                FilterChips(allergies = it.allergy)
+            }
+        }
+        BottomButtons(
+            buttonText = "Continue",
+            onClick = { navController.navigate(Navigation.GoalsScreen.route) })
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@Preview(
-    showBackground = true
-)
-
-@Composable
-fun ChooseDietScreenPreview() {
-    ChooseDietScreen()
-}
-
-//@OptIn(ExperimentalFoundationApi::class)
-//@Composab le
-//fun AllergiesTags(
-//  //  chips: List<String>
-//) {
-//    var isSelected by remember { mutableStateOf(false)}
-//
-//    LazyHorizontalGrid(
-//        rows = GridCells.Fixed(3),
-//        horizontalArrangement = Arrangement.spacedBy(16.dp),
-//        verticalArrangement = Arrangement.spacedBy(16.dp)
-//    ){
-//
-//    }
-//}
-
 @Composable
 fun DietsCards(
-    image : Painter,
-    dietType : String,
+    image: Painter,
+    dietType: String,
 ) {
-    Column (
+    Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -160,7 +153,7 @@ fun DietsCards(
                 Color.LightGray,
                 RoundedCornerShape(12.dp)
             ),
-            ){
+    ) {
         Spacer(modifier = Modifier.height(4.dp))
         Image(
             painter = image,
@@ -177,7 +170,9 @@ fun DietsCards(
 }
 
 @Composable
-fun DietScreenProgressBar() {
+fun DietScreenProgressBar(
+    navController: NavHostController
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -191,15 +186,38 @@ fun DietScreenProgressBar() {
         )
         Spacer(modifier = Modifier.width(12.dp))
         Text(
-            "Skip".uppercase(),
+            text = "Skip".uppercase(),
             style = TextStyle(
                 textDecoration = TextDecoration.Underline,
                 textAlign = TextAlign.Right,
                 fontSize = 14.sp
             ),
-            modifier = Modifier.weight(.1f)
+            modifier = Modifier
+                .weight(.1f)
+                .clickable { navController.navigate(Navigation.GoalsScreen.route) }
         )
     }
 }
 
-
+@Composable
+fun FilterChips(
+    allergies: String
+) {
+    TextButton(
+        shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(1.dp, Color.Black),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.White,
+            contentColor = Color.Black,
+        ),
+        onClick = {}
+    ) {
+        Text(
+            text = allergies,
+            style = TextStyle(
+                fontSize = 20.sp
+            ),
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+    }
+}

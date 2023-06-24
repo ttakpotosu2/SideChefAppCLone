@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,14 +54,17 @@ fun BottomButtons(
 }
 
 @Composable
-fun LargeContentCard(largeCardDetailsData: LargeCardDetailsData) {
-
+fun LargeContentCard(
+    largeCardDetailsData: LargeCardDetailsData,
+    onClick : () -> Unit
+) {
     Column (
         verticalArrangement = Arrangement.Top,
         modifier = Modifier
             .size(300.dp, 440.dp)
             .clip(RoundedCornerShape(20.dp))
             .border(1.dp, Color.Gray, RoundedCornerShape(20.dp))
+            .clickable { onClick() }
     ){
         Box(
             modifier = Modifier.size(300.dp,300.dp)
@@ -78,7 +82,9 @@ fun LargeContentCard(largeCardDetailsData: LargeCardDetailsData) {
                             startY = 0f,
                             endY = 1f
                         )
-                    ),
+                    )
+                    .fillMaxWidth()
+                ,
                 contentScale = ContentScale.Crop
             )
             Column(

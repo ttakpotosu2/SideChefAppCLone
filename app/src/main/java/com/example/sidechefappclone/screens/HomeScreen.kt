@@ -24,18 +24,22 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.sidechefappclone.customNav.CustomBottomNavigation
 import com.example.sidechefappclone.customNav.Screen
 import com.example.sidechefappclone.data.LargeCardRepository
 import com.example.sidechefappclone.data.SmallCardRepository
+import com.example.sidechefappclone.navigation.Navigation
 import com.example.sidechefappclone.util.ExtraSmallContentCard
 import com.example.sidechefappclone.util.LargeContentCard
 import com.example.sidechefappclone.util.MediumSizeContentCard
 import com.example.sidechefappclone.util.SmallContentCard
 
-@SuppressLint("UnrememberedMutableState")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnrememberedMutableState")
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavHostController
+) {
 
     val currentScreen = mutableStateOf<Screen>(Screen.ForYou)
 
@@ -45,105 +49,41 @@ fun HomeScreen() {
         },
         bottomBar = {
             CustomBottomNavigation(currentScreenId = currentScreen.value.id){
-                currentScreen.value=it
+                currentScreen.value = it
             }
         },
         content = {
-            ForYouScreen()
+            ForYouScreen(navController)
         }
     )
 }
 
-@Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}
-
-//@Composable
-//fun BottomNavigationBar(
-//    navController: NavHostController
-//) {
-//    BottomNavigation(
-//        backgroundColor = White,
-//    ) {
-//        val navBackStackEntry by navController.currentBackStackEntryAsState()
-//
-//        val currentRoute = navBackStackEntry?.destination?.route
-//
-//        Constants.BottomNavigationItems.forEach{ navItem ->
-//            BottomNavigationItem(
-//                selected = currentRoute == navItem.route,
-//                onClick = {navController.navigate(navItem.route)},
-//                icon = {
-//                    Icon(
-//                        imageVector = navItem.icon,
-//                        contentDescription = navItem.label
-//                    )
-//                },
-//                label = {
-//                    Text(text = navItem.label)
-//                },
-//                alwaysShowLabel = false
-//            )
-//        }
-//    }
-//}
-
-//@Composable
-//fun NavHostContainer(
-//    navController: NavHostController,
-//    padding: PaddingValues
-//) {
-//    NavHost(
-//        navController = navController,
-//        startDestination = "for_you",
-//        modifier = Modifier.padding(paddingValues = padding),
-//
-//        builder = {
-//            composable("for_you"){
-//                HomeScreen()
-//            }
-//            composable("search"){
-//                TODO("Add home screen")
-//            }
-//            composable("saved"){
-//                TODO("Add home screen")
-//            }
-//            composable("meal_plan"){
-//                TODO("Add home screen")
-//            }
-//        }
-//    )
-//}
-
-@Composable
-fun ForYouScreen() {
+fun ForYouScreen(
+    navController: NavHostController
+) {
     val largeCardRepository = LargeCardRepository()
-    val getLargeCardData = largeCardRepository.getLargeCardData()
-
     val smallCardRepository = SmallCardRepository()
-    val getSmallCardData = smallCardRepository.getSmallCardData()
+    val scrollState = rememberScrollState(0)
 
-    rememberScrollState()
     Column (
-        modifier = Modifier
-            .verticalScroll(rememberScrollState(0))
+        modifier = Modifier.verticalScroll(scrollState)
     ){
         Text(text = "Daily Inspiration",
             style = TextStyle(
                 fontSize = 32.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Bold
             ),
             modifier = Modifier.padding(12.dp)
         )
-
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(12.dp)
         ){
-            items(items = getLargeCardData){ largeCard ->
-                LargeContentCard(largeCardDetailsData = largeCard)
+            items(items = largeCardRepository.getLargeCardData()){ largeCard ->
+                LargeContentCard(largeCardDetailsData = largeCard) {
+                    navController.navigate(Navigation.LargeCardDetailsScreen.route)
+                }
             }
         }
         Row(
@@ -154,7 +94,7 @@ fun ForYouScreen() {
             Text(text = "Meal Plans Made Easy",
                 style = TextStyle(
                     fontSize = 22.sp,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Bold
                 )
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -170,26 +110,31 @@ fun ForYouScreen() {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(12.dp)
         ){
-            items(items = getSmallCardData){ smallCard ->
+            items(items = smallCardRepository.getSmallCardData()){ smallCard ->
                 SmallContentCard(smallCardDetailsData = smallCard)
             }
         }
         Text(text = "Explore Premium Recipes",
             style = TextStyle(
                 fontSize = 22.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Bold
             ),
             modifier = Modifier.padding(12.dp)
         )
-        MediumSizeContentCard()
+        Row(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            MediumSizeContentCard()
+        }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(12.dp)
         ) {
             Text(text = "30-Minute Dinner Ideas",
                 style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
                 )
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -199,21 +144,14 @@ fun ForYouScreen() {
                     fontWeight = FontWeight.Medium,
                     textDecoration = TextDecoration.Underline
                 )
+
             )
         }
-        ExtraSmallContentCard()
-        Text(text = "Editor's Choice",
-            style = TextStyle(
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
-            )
-        )
-        Text(text = "Lunar New Year Essentials",
-            style = TextStyle(
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
-            )
-        )
+        Row(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            ExtraSmallContentCard()
+        }
     }
 }
 
@@ -260,4 +198,3 @@ fun TopBar() {
         }
     }
 }
-

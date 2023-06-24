@@ -3,8 +3,8 @@ package com.example.sidechefappclone.data
 import com.example.sidechefappclone.R
 
 data class ChooseDietScreenData(
-    val image : Int,
-    val dietType : String
+    val image: Int,
+    val dietType: String
 )
 
 val chooseDietCards = listOf(
@@ -16,4 +16,3 @@ val chooseDietCards = listOf(
     ChooseDietScreenData(image = R.drawable.egg, dietType = "Low-Carb"),
     ChooseDietScreenData(image = R.drawable.popsickle, dietType = "Keto")
 )
-
