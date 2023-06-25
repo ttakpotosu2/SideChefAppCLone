@@ -1,7 +1,10 @@
 # SideChefAppCLone
 Clone of Side Chef App
 This project was meant to give hands-on approach to learning Jetpack Compose by building a popular "challenging" User Interface using jetpack compose.
-For reference check out the screen shots, and guide at
+
+#Technology Stack
+1. Jetpack Compose
+2. Mobbin.com for reference check out the screen shots, and guide at
 https://mobbin.com/apps/side-chef-android-ff85e04f-d493-4251-a9c3-9e35530632ef/d0607cc7-14b7-4755-bd81-5a399b26b11e/flows
 
 Below are a few pages recreated with Jetpack Compose
